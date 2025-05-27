@@ -3,9 +3,13 @@ package nino.perceptron;
 import nino.data.Data;
 
 public class Neuron {
+    // Pesos
     private float weight[];
+    // Sesgo: será definido aleatoreamente
     private float bias;
+    // Tasa de aprendizaje
     private float rate;
+    // Resultado
     private int output;
     // Constants
     private int upperLimit = 2;
@@ -26,10 +30,13 @@ public class Neuron {
         return auxWeight;
     }
 
-    // Algoritmo de predicción
+    // Algoritmo de Sigmoid
+    // Funcióom heuristica
     public int sigmoid(int[] entries) {
+        // Suma pomderada
         float wSum = this.bias;
         int result;
+        // For para suma ponderada
         for(int i = 0; i < entries.length; i++) {
             wSum += entries[i] * this.weight[i];
         }
@@ -47,7 +54,9 @@ public class Neuron {
     // Algoritmo de entrenamiento: calcula el error de cada entrada/salida
     // exOutput = salida esperada (expected output)
     public void train(int[] entries, int exOutput) {
+        // Calcula la salida para cada entrada
         this.output = sigmoid(entries);
+        // Y que tan erroneo fue el resultado
         int error = exOutput - this.output;
 
         for(int i = 0; i < this.weight.length; i++) {
